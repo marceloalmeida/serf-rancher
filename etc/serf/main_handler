@@ -1,0 +1,20 @@
+#!/bin/sh
+HANDLER_DIR="/etc/serf/handlers"
+REMOTE_LOG=/var/log/serf_remote.log
+
+if [ "$SERF_EVENT" = "user" ]; then
+    EVENT="user-$SERF_USER_EVENT"
+elif [ "$SERF_EVENT" = "query" ]; then
+    EVENT="query-$SERF_QUERY_NAME"
+else
+    EVENT=$SERF_EVENT
+fi
+
+# Grab remote executions
+if [ "${SERF_USER_EVENT}" = "response" ]; then
+    cat >> $REMOTE_LOG
+    exit 0
+fi
+
+HANDLER="$HANDLER_DIR/$EVENT"
+[ -f "$HANDLER" -a -x "$HANDLER" ] && exec "$HANDLER" || :

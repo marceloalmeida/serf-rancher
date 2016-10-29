@@ -1,0 +1,28 @@
+#!/bin/bash
+
+LOCAL_LOG=/var/log/serf_local.log
+
+log ()
+{
+    echo "[$(date +"%Y-%m-%d %T.%6N")] [$HOSTNAME] $1" 1>> $LOCAL_LOG
+}
+
+response ()
+{
+    serf event response "[$(date +"%Y-%m-%d %T.%6N")] [$HOSTNAME]: $1"
+}
+
+log "$0 triggered!"
+log "SERF_EVENT is ${SERF_EVENT}"
+log "SERF_SELF_NAME is ${SERF_SELF_NAME}"
+log "SERF_SELF_ROLE is ${SERF_SELF_ROLE}"
+log "SERF_USER_EVENT is ${SERF_USER_EVENT}"
+log "BEGIN event data"
+while read line; do
+  log "Executing $line"
+  output="$(exec $line)"
+  log "$output"
+  response "$output"
+done
+log "END event data"
+log "$0 finished!"
