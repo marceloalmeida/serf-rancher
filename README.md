@@ -1,5 +1,7 @@
 # Serf-Rancher
 
+[![Build Status](https://travis-ci.org/marcelosousaalmeida/serf-rancher.svg?branch=master)](https://travis-ci.org/marcelosousaalmeida/serf-rancher)
+
 This is simple Docker image that create a Serf cluster on Rancher, with own metadata details. Also have `user-exec` handler that allows user to run any shell command on entire cluster and receive/log all node responses on a log.
 
 ## Serf
