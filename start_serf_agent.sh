@@ -20,4 +20,4 @@ exec serf agent \
   -event-handler=/etc/serf/main_handler \
   -tag name="$NAME" \
   -tag external_id="$EXTERNAL_ID" \
-  -tag physical_hostname="$PHYSICAL_HOSTNAME
+  -tag physical_hostname="$PHYSICAL_HOSTNAME"
