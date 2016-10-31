@@ -1,0 +1,7 @@
+#!/bin/bash
+
+METADATA="http://169.254.169.250/latest"
+
+for IP in $(curl -s --header 'Accept: application/json' "$METADATA/self/service/containers" | jq  -r '.[] | if .state=="stopped" then "" else .primary_ip end'); do
+  serf join $IP
+done
