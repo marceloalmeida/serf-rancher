@@ -20,7 +20,7 @@ log "SERF_USER_EVENT is ${SERF_USER_EVENT}"
 log "BEGIN event data"
 while read line; do
   log "Executing $line"
-  output="$(exec $line)"
+  output="$(eval $line)"
   log "$output"
   response "$output"
 done
